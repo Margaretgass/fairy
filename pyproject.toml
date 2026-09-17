@@ -27,6 +27,9 @@ packages = ["src/fairy"]
 [tool.ruff]
 line-length = 100
 src = ["src", "tests"]
+# Tutorial code blocks are illustrative: aligned comments aid reading, and some
+# snippets are deliberately incomplete. Don't reformat them.
+extend-exclude = ["docs"]
 
 [tool.ruff.lint]
 # E/W pycodestyle, F pyflakes, I import sorting, UP modern syntax, B common bugs
