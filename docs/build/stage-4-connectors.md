@@ -82,9 +82,8 @@ class Connector(Protocol):
 
 ### Understanding `Protocol`
 
-A `Protocol` is a **structural** interface. Any class that happens to have a `name`
-attribute and a `fetch()` method satisfies it — it does **not** need to inherit from
-`Connector`.
+**New concept: `Protocol`** — a structural interface. Any class with a `name` and a
+`fetch()` satisfies it. No inheritance needed.
 
 ```python
 class D2LConnector:          # inherits from nothing
@@ -93,10 +92,8 @@ class D2LConnector:          # inherits from nothing
 # ...and this already IS a Connector, as far as type checkers care
 ```
 
-This is sometimes called "duck typing with types": if it walks like a duck, it's a duck,
-and now your editor can check the walking. Compare with Java-style interfaces, where you
-must declare `implements Connector` — Protocols keep your classes independent of each
-other.
+"Duck typing with types" — if it walks like a duck it's a duck, and your editor can now
+check the walking. Your connectors stay independent of each other.
 
 ### Why one `SourceItem` for everything
 
@@ -117,9 +114,11 @@ class FixtureConnector:
     name = "fixture"
 ```
 
-You get two things from one small class: **fast hermetic tests** (no network, works
-offline, works in CI) and **demo mode** in Stage 6 (a stranger can run your project with no
-credentials). Building it now costs ten minutes; retrofitting it later is painful.
+Two things from one small class:
+- **Fast tests** — no network, works offline, works in CI
+- **Demo mode** in Stage 6 — a stranger runs your project with no credentials
+
+Ten minutes now. Painful to retrofit later.
 
 ### ✔ Check yourself
 
@@ -518,10 +517,14 @@ cd ~/code/fairy && uv add google-api-python-client google-auth-oauthlib
 
 ### Understanding OAuth in one paragraph
 
-You never give your app your Gmail password. Instead: your app opens a Google page, *you*
-log in there, Google asks "allow this app to read your mail?", and on yes it hands your app
-a **token**. The token is limited to the scope you approved and can be revoked any time
-from your Google account. That's the whole idea — delegated, limited, revocable access.
+You never give your app your Gmail password.
+
+1. Your app opens a Google page
+2. **You** log in there, and Google asks "allow this app to read your mail?"
+3. On yes, Google hands your app a **token**
+
+The token is limited to the scope you approved and revocable from your Google account.
+Delegated, limited, revocable — that's OAuth.
 
 ### Where the two files go
 
@@ -604,10 +607,12 @@ Messages live in a SQLite database — which you already know how to read:
 System Settings → Privacy & Security → Full Disk Access. **Fully quit and reopen the app
 afterwards** or the grant won't take effect.
 
-**Trap 2 — do not copy the file.** Copying a TCC-protected file *appears* to succeed,
-returns exit code 0, and silently produces an **empty database**. The error you get later
-is `no such table: message`, which looks like a schema problem and is actually a permissions
-problem. Read it in place, read-only:
+**Trap 2 — do not copy the file.** Copying a TCC-protected file:
+- *appears* to succeed and returns exit code 0
+- silently produces an **empty database**
+- fails later with `no such table: message`, which looks like a schema problem
+
+Read it in place, read-only:
 
 ```python
 conn = sqlite3.connect(f"file:{CHAT_DB}?mode=ro", uri=True)

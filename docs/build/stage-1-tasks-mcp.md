@@ -54,6 +54,12 @@ first architectural decision you make, and everything later depends on it.
 
 ### Part A — `src/fairy/models.py`
 
+**What it does:** defines the shape of a task. No database, no network — just definitions.
+
+**Why it matters:**
+- Every other part of Fairy agrees on these shapes — MCP server, web UI, desktop fairy
+- Pydantic rejects bad data here, before it reaches your database
+
 Start with the imports:
 
 ```python
@@ -188,6 +194,22 @@ these now saves hours later.
 
 ### Part B — `src/fairy/store.py`
 
+**What it does:** creates `~/.fairy/fairy.db` and hands other code a safe connection to it.
+
+**Why it matters** — three separate programs share this one file:
+
+```
+Claude Desktop -> MCP server  --+
+                                |
+The floating fairy  -----------+--->  store.py  --->  ~/.fairy/fairy.db
+                                |
+The web UI  -------------------+
+```
+
+- They never talk to each other
+- They stay in sync because all three call `store.session()`
+- This is Fairy's whole integration strategy — a file path instead of a server
+
 ```python
 """SQLite storage. One file, shared by every part of Fairy."""
 
@@ -252,7 +274,7 @@ path segments. Reads like a path, works on any OS, much better than gluing strin
 | `PRAGMA journal_mode=WAL` | Write-Ahead Logging. Lets one process read while another writes. **Stage 3's desktop fairy depends on this** — without it you get `database is locked`. |
 | `executescript(SCHEMA)` | Runs several SQL statements at once. `execute()` only runs one. |
 
-**Understanding the context manager.** The concept most worth slowing down on.
+**New concept: `@contextmanager`**
 
 ```python
 @contextmanager
@@ -273,13 +295,15 @@ with store.session() as conn:
 # committed and closed automatically, here
 ```
 
-Everything before `yield` is setup; everything after is teardown. `finally` guarantees the
-connection closes even if your code raises — which is the entire point. Without it you leak
-database connections every time something goes wrong.
+- Before `yield` — setup
+- `yield conn` — hands the connection to the `with` block
+- After `yield` — runs on success (`commit`)
+- `finally` — runs always, even on a crash (`close`)
 
-**Why `db_path: Path | None = None`.** This one optional argument is why your tests can use
-a throwaway database. Without it, running your test suite would wipe your real tasks. This
-is what "designing for testability" looks like in practice: one parameter, decided early.
+Without `finally`, a crash leaks a database connection.
+
+**Why `db_path=None`:** tests pass a throwaway path. Without it, running your tests would
+wipe your real tasks.
 
 ### ✔ Check yourself
 
@@ -296,6 +320,8 @@ You should see your `tasks` table. The file now exists at `~/.fairy/fairy.db`.
 | `ModuleNotFoundError: No module named 'fairy'` | File is in the wrong folder, or run `uv sync` again |
 | `ImportError: cannot import name 'StrEnum'` | Python older than 3.11 — check your interpreter |
 | Squiggles on unused imports | Normal until you use them. Don't run `ruff --fix` on a half-written file |
+| `SyntaxError: expected ':'` on a `def` line | A line got split where there's no open bracket. Put the whole signature on one line |
+| Many squiggles at once, all below one point | **One** syntax error. Fix the topmost; the rest are fallout |
 
 ### ■ Finish this session
 
@@ -451,6 +477,11 @@ cd ~/code/fairy && git add -A && git commit -m "test: add failing tests for task
 
 ### Part B — make them pass
 
+**What it does:** the four things you can do with a task — add, get, list, complete.
+
+- `models.py` = what a task is · `store.py` = where it lives · `tasks.py` = what you do with it
+- All SQL lives here. The MCP server and web UI just call these functions
+
 `src/fairy/tasks.py`:
 
 ```python
@@ -552,10 +583,9 @@ Everything after `*` **must** be passed by name. `add_task(conn, "x", now=NOW)` 
 `add_task(conn, "x", cat, NOW)` is an error. It prevents argument-order bugs and makes call
 sites self-documenting.
 
-**Why `now` is a parameter at all.** A function that calls `datetime.now()` inside is nearly
-impossible to test — the answer changes every run. Passing time in lets your tests use a
-fixed `NOW` and assert exact values. You'll meet this pattern again in Stage 2, where the
-entire timer engine is built on it.
+**Why `now` is a parameter:** a function that calls `datetime.now()` inside can't be tested
+— the answer changes every run. Passing time in lets tests assert exact values. Stage 2's
+whole timer engine is built on this.
 
 **Understanding the list comprehension:**
 
@@ -605,14 +635,20 @@ cd ~/code/fairy && git pull && uv sync
 
 **Goal:** make your code callable by an AI.
 
-**What MCP is.** The Model Context Protocol is a standard way for a program to say *"here
-are the tools I have, here's what each does, here's what arguments it takes."* A client —
-Claude Desktop, or your own agent in Stage 5 — asks for that list, shows it to the model,
-and runs whichever tool the model picks.
+**What it does:** exposes your three task functions to Claude Desktop.
 
-You're building the **server** side. The transport is **stdio**: the client starts your
-program and they talk over standard input and output. No ports, no HTTP, no authentication.
-That's why this stage has no security section.
+**New concept: MCP.** A standard way for a program to advertise *"here are my tools, here's
+what each does, here's what arguments it takes."*
+
+- A client (Claude Desktop, or your own agent in Stage 5) asks for that list
+- It shows the list to the model, and runs whichever tool the model picks
+- You're writing the **server** side
+
+**Transport is stdio** — the client starts your program and talks over stdin/stdout.
+No ports, no HTTP, no auth. That's why this stage has no security section.
+
+This file holds **no logic**. Each tool opens a session, calls `tasks.py`, returns JSON.
+The real behaviour is tested in `tasks.py`, so there's almost nothing here to break.
 
 `src/fairy/servers/tasks_server.py`:
 
@@ -678,11 +714,12 @@ if __name__ == "__main__":
     main()
 ```
 
-**Understanding the decorator.** `@mcp.tool` above a function registers it as a tool. A
-decorator is a function that takes your function and does something with it — here FastMCP
-reads your **type hints** to build a JSON schema of the arguments, and your **docstring** to
-describe what it does. You write an ordinary Python function; the protocol paperwork is
-generated for you.
+**New concept: decorators.** `@mcp.tool` takes your function and registers it. FastMCP then:
+
+- reads your **type hints** → builds a JSON schema of the arguments
+- reads your **docstring** → describes what the tool does
+
+You write an ordinary function; the protocol paperwork is generated.
 
 > **Docstrings are the API.** The model has never seen your code. All it gets is the tool
 > name, the argument types, and the text of your docstring. A vague docstring produces

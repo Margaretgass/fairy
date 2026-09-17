@@ -1,4 +1,4 @@
-# Typed objects shared by every part of Fairy.
+"""Typed objects shared by every part of Fairy."""
 
 from __future__ import annotations
 
@@ -8,8 +8,9 @@ from enum import StrEnum
 from pydantic import BaseModel, Field
 
 
-class Category(str, StrEnum):
-    # how a task fits into the day, from og design docs
+class Category(StrEnum):
+    """how a task fits into the day, from og design docs"""
+
     ANCHOR = "Anchor"
     QUEST = "Quest"
     MAINTENANCE = "Maintenance"

@@ -19,10 +19,9 @@
 
 ### Why this stage is your best one
 
-The original `bloom-engine.js` was written in a pure, time-injected style **and ships with
-a test suite**. You are translating a known-correct specification, not inventing behaviour.
-That means when a test fails, the test is right and your code is wrong — which is a
-wonderfully clear place to learn from.
+`bloom-engine.js` is already pure and time-injected, **and ships with a test suite**. You're
+translating a known-correct spec, not inventing behaviour — so when a test fails, the test
+is right and your code is wrong.
 
 Source files in the old repo:
 - `ADHD_Fairy_Final_Handoff/prototype/bloom-engine.js`
@@ -290,6 +289,21 @@ clock itself — you'd have to actually wait, or resort to elaborate mocking.
 
 ### `src/fairy/domain/bloom.py`
 
+**What it does:** holds every rule about focus time — block length, breaks, what makes a
+flower, what happens when your laptop sleeps.
+
+It stores nothing and displays nothing. State and time in, new state out.
+
+**Why it matters** — three programs run this same file:
+
+| Who | Uses it to |
+|---|---|
+| `timer_server.py` (Session 4) | Answer Claude's "start a focus session" |
+| The desktop fairy (Stage 3) | Tick the countdown every second, locally |
+| The web UI (Stage 6) | Render the plant's growth stage |
+
+Change `BLOCK_MS` and all three change together.
+
 ```python
 """The focus timer. PURE — no database, no network, no clock.
 
@@ -488,16 +502,10 @@ new_plant = replace(old_plant, focus_ms=1500)
 Reads as: *a copy of `old_plant`, but with `focus_ms` set to 1500.* Everything else is
 carried over. The original is untouched.
 
-**Why bother?** Three reasons, all of which you'll feel:
-
-1. **No spooky action at a distance.** A function can never secretly modify state that
-   something else is holding.
-2. **Tests can compare before and after** — the old state still exists.
-3. **Stage 3's desktop fairy** can hold a state and tick it locally without any risk of
-   corrupting what's in the database.
-
-The original JavaScript achieved the same thing with `structuredClone`. Frozen dataclasses
-are Python's cleaner version.
+**Why bother:**
+- A function can never secretly modify state something else is holding
+- Tests can compare before and after — the old state still exists
+- Stage 3's fairy can tick a state locally without corrupting the database
 
 **Why `collection` is a tuple, not a list.** Lists are mutable; tuples aren't. A frozen
 dataclass holding a list would still let you do `state.collection.append(...)` — immutable

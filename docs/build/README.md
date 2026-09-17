@@ -154,8 +154,13 @@ supervision, and deployment from stages 1–5 entirely.
 
 A skill, and a learnable one.
 
-**Read from the bottom up.** The last line says *what* went wrong; the lines above say
-*where*. Python tracebacks are honest — the hard part is believing them.
+**For a traceback: read from the bottom up.** The last line says *what* went wrong; the
+lines above say *where*. Python tracebacks are honest — the hard part is believing them.
+
+**For squiggles in the editor: read from the top down, and fix only the first one.** A
+single syntax error makes the parser give up, so everything after it gets flagged too. Six
+red squiggles is usually one real mistake plus five pieces of fallout. Fix the topmost, and
+watch the rest disappear.
 
 | You see | It usually means |
 |---|---|

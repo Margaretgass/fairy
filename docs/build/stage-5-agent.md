@@ -133,9 +133,9 @@ where it pauses — "start this, and let other code run while we wait."
 **Why here and not in Stage 1?** Waiting for a model takes 5–30 seconds, and that's *waiting
 on something else*, not computing. Async lets your program do other things meanwhile.
 
-Your SQLite code stays synchronous, and that's correct — it's fast and local, so there's
-nothing to wait for. **Async is for waiting, not for speed.** Adding it where nothing waits
-just makes code harder to read.
+Your SQLite code stays synchronous — it's local and fast, nothing to wait for.
+
+**Async is for waiting, not for speed.**
 
 ### Selecting a provider
 
@@ -249,14 +249,11 @@ constraint handed to the model.
 3. RETRY       send the error back  -> twice, then fail honestly
 ```
 
-**Why step 2 when step 1 guarantees valid JSON?** Because "valid" and "correct" differ. The
-model can return `{"category": "Banana"}` — perfectly valid JSON, not one of your four
-categories. Pydantic catches that; the schema alone doesn't.
+**Why step 2** — valid isn't the same as correct. `{"category": "Banana"}` is valid JSON
+and still wrong. Pydantic catches it; the schema doesn't.
 
-**Why step 3.** Small models make small mistakes. Handing back the actual validation error
-("Banana is not a valid Category") usually gets a correct answer on the second try. Cap it
-at two retries and then report failure — an agent that retries forever is worse than one
-that admits defeat.
+**Why step 3** — handing back the actual error ("Banana is not a valid Category") usually
+fixes it on the second try. Cap at two retries, then fail honestly.
 
 ### ✔ Check yourself
 

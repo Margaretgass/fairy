@@ -49,10 +49,11 @@ actual `fairy-full.png` before this guide was written.
 
 ### The thing that isn't in any documentation
 
-Qt's documented flags are **not enough** on macOS. With only
-`FramelessWindowHint | WindowStaysOnTopHint | WindowDoesNotAcceptFocus | Qt.Tool` plus
-`WA_ShowWithoutActivating` — the combination every forum post recommends — the window
-**still stole keyboard focus**. Tested, confirmed, failed.
+Qt's documented flags are **not enough** on macOS.
+
+- Every forum post recommends `FramelessWindowHint | WindowStaysOnTopHint |
+  WindowDoesNotAcceptFocus | Qt.Tool` plus `WA_ShowWithoutActivating`
+- Tested on your machine: the window **still stole keyboard focus**
 
 The fix isn't a Qt setting at all. You have to tell macOS the process is an *accessory*
 app, which is what `LSUIElement` does for a bundled app:
@@ -154,10 +155,11 @@ fairy.show()                   # 3. show them
 sys.exit(app.exec())           # 4. hand control to the event loop
 ```
 
-`app.exec()` **does not return** until the app quits. It's an infinite loop that waits for
-events — mouse moves, clicks, timers, repaint requests — and calls your code when one
-arrives. This is why GUI code is written as *methods that get called*, rather than a script
-that runs start to finish.
+`app.exec()` **does not return** until the app quits.
+
+- It's a loop waiting for events — clicks, mouse moves, timers
+- When one arrives, it calls your code
+- This is why GUI code is *methods that get called*, not a script that runs top to bottom
 
 ### Understanding the window flags
 
@@ -181,9 +183,9 @@ class Fairy(QWidget):
         super().__init__()
 ```
 
-`__init__` runs when you create an object. `super().__init__()` runs the **parent class's**
-setup first — here, all of `QWidget`'s internal machinery. Forget it and you get confusing
-crashes, because you'd be configuring a widget that was never properly constructed.
+- `__init__` runs when you create the object
+- `super().__init__()` runs the parent's setup first — here, all of `QWidget`'s machinery
+- Forget it and you get confusing crashes: you'd be configuring a widget that was never built
 
 ### ✔ Check yourself
 
@@ -262,16 +264,13 @@ def mouseReleaseEvent(self, event):
         self._on_click()
 ```
 
-**Why the 5-pixel threshold.** A human "click" always includes a pixel or two of movement.
-Without a threshold every click would nudge her sideways, and you'd never be able to click
-her reliably. Below 5 pixels it's a click; above, it's a drag. The original Swift used the
-same rule.
+**Why the 5-pixel threshold:** a human click always includes a pixel or two of movement.
+Without it, every click nudges her sideways. Under 5px = click, over = drag.
 
 `manhattanLength()` is `abs(dx) + abs(dy)` — cheaper than real distance and fine here.
 
-**These methods are called *for* you.** You never call `mouseMoveEvent` — Qt's event loop
-does, whenever the mouse moves over your widget. Overriding a method the framework calls is
-the core pattern of GUI programming.
+**You never call these yourself.** Qt's event loop calls them when the mouse moves.
+Overriding methods the framework calls is the core pattern of GUI programming.
 
 ### Snap to the nearest edge
 
@@ -371,10 +370,12 @@ def _tick(self) -> None:
     self._label.setText(self._format_remaining())
 ```
 
-**Why this works.** `bloom.tick(state, now_ms)` takes time as a parameter, so the fairy can
-run the *exact same engine* locally between syncs. You get a smooth display, ~2,900
-database reads a day instead of 86,400, and she keeps counting correctly even if the MCP
-server isn't running.
+**Why this works:** `bloom.tick(state, now_ms)` takes time as a parameter, so the fairy runs
+the same engine locally between syncs.
+
+- Smooth display
+- ~2,900 database reads a day instead of 86,400
+- Keeps counting even if the MCP server isn't running
 
 That is the concrete payoff of the purity rule from Stage 2. The same function runs in your
 tests, in the MCP server, and in the GUI — with no modification.
@@ -455,10 +456,12 @@ def leaveEvent(self, event):
     self._hide_peek()
 ```
 
-**Why the delay and the cancel.** Without a delay, the peek flashes every time your cursor
-crosses her on the way somewhere else. `setSingleShot(True)` means it fires once rather
-than repeating, and `leaveEvent` cancels it if you move away first. Delay-then-cancel is
-the standard pattern for any hover UI.
+**Why delay, then cancel:**
+- Without a delay, the peek flashes whenever your cursor crosses her
+- `setSingleShot(True)` fires once instead of repeating
+- `leaveEvent` cancels it if you move away first
+
+Delay-then-cancel is the standard pattern for any hover UI.
 
 ### Menu bar icon
 

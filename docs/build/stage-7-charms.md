@@ -137,19 +137,21 @@ def test_everything_can_unlock_at_once_and_is_idempotent():
 ### Read three of these carefully
 
 **`test_an_unknown_event_type_changes_nothing`** compares **whole states**:
-`assert after == state`. Only four event types count. An unrecognised one like `"launch"`
-must change *nothing* — not the day list, not the counts, nothing. Comparing whole objects
-is a strong assertion, and it's possible here because frozen dataclasses give you `==` for
-free.
+`assert after == state`.
+
+- Only four event types count
+- An unrecognised one like `"launch"` must change *nothing* — not the day list, not the counts
+- Comparing whole objects works because frozen dataclasses give you `==` for free
 
 **`test_there_is_no_sequence_gate`** encodes a *product* rule as a test. Finish a quest
 before your first task and you get the quest charm and not the task charm. Someone
 "optimising" later might be tempted to add ordering; this test stops them.
 
-**`test_everything_can_unlock_at_once_and_is_idempotent`** is the important one. Running
-`evaluate` twice must not change anything the second time. **That's idempotency**, and it's
-what lets you call `evaluate` freely — after every task, on every app start, whenever —
-without worrying about double-awarding.
+**`test_everything_can_unlock_at_once_and_is_idempotent`** — running `evaluate` twice must
+change nothing the second time.
+
+**New concept: idempotency.** It's what lets you call `evaluate` after every task, on every
+app start, whenever — with no risk of double-awarding.
 
 ### ✔ Check yourself
 
@@ -218,10 +220,9 @@ if len(state.tasks) >= 5: unlock("matcha")
 ...
 ```
 
-The table version is one piece of logic you test once. Adding a nineteenth charm is **one
-new row**, no new code path, no new test for the mechanism. This is one of the highest-value
-habits in programming: when you notice repeated branching that differs only in values, turn
-the values into data.
+- The table is one piece of logic you test once
+- A nineteenth charm is **one new row** — no new code path, no new test
+- General habit: when branches differ only in values, turn the values into data
 
 ### The four functions
 
@@ -337,9 +338,8 @@ counts and dates. Plain terracotta pots, no hearts.
 | **Defer during a running focus session** | Never interrupt focus. Queue until it pauses or the block ends |
 | Dismissing acknowledges **presentation**, not ownership | Closing a window must never cost you something you earned |
 
-That first one is a genuinely good engineering habit: **persist state before you present
-it.** Anything you show the user should already be true in storage. Otherwise a crash
-between "show" and "save" leaves them believing something that isn't so.
+**Persist before you present.** Anything you show should already be true in storage — or a
+crash between "show" and "save" leaves the user believing something false.
 
 Use the real pixel assets from `assets/charms.png` with the source rectangles in
 `sprite-rects.json`. **Never substitute emoji for the collectible art** — that was an

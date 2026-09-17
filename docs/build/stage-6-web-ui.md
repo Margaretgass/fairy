@@ -108,12 +108,9 @@ the HTTP method (`get`) together identify the route. This is the same decorator 
 
 Note it's plain `def`, not `async def`.
 
-**FastAPI runs sync endpoints in a threadpool automatically**, so your `sqlite3` code is
-perfectly safe in one and much simpler to write. Use `async def` only where it earns
-something — the LLM calls from Stage 5 and HTTP calls to connectors.
-
-This is the same lesson as Stage 5: **async is for waiting on something else.** SQLite is
-local and fast; there's nothing to wait for.
+- FastAPI runs sync endpoints in a threadpool automatically — your `sqlite3` code is safe
+- Use `async def` only where it earns something: LLM calls, HTTP connectors
+- Same lesson as Stage 5 — **async is for waiting**, and SQLite doesn't wait
 
 ### Understanding templates
 
@@ -228,10 +225,10 @@ def complete(request: Request, task_id: int):
         )
 ```
 
-**Why this is less work than React.** In a React app you'd return JSON, then write client
-code to hold state, re-render, and handle errors. With HTMX the server sends back the new
-HTML and the browser swaps it in. There is no client state to keep in sync — because there
-is no client state.
+**Why this is less work than React:**
+- React → return JSON, then write client code to hold state, re-render, handle errors
+- HTMX → server returns HTML, browser swaps it in
+- No client state to keep in sync, because there is no client state
 
 The `_` prefix on `_task_list.html` is a convention for *partials* — templates meant to be
 included or returned as fragments, not rendered as whole pages.
@@ -351,10 +348,8 @@ When `FAIRY_MODE=demo`:
 cd ~/code/fairy && FAIRY_MODE=demo uv run uvicorn fairy.web.app:app
 ```
 
-**Notice how little work this is** — because you built `StubProvider` and
-`FixtureConnector` when you built their real counterparts. That's why those sessions
-insisted on it. Retrofitting demo mode into a project that assumes real credentials
-everywhere is genuinely painful.
+This is quick **because** you built `StubProvider` and `FixtureConnector` alongside their
+real counterparts. Retrofitting demo mode later is painful.
 
 ⚠️ **Fixture data must be invented**, not your real life with the names changed. It's going
 in a public repo.
