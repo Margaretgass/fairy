@@ -447,8 +447,18 @@ fails — which is what you want, because silently returning `None` is how bugs 
 cd ~/code/fairy && uv run pytest
 ```
 
-You'll get `ModuleNotFoundError: No module named 'fairy.tasks'`. **That's the correct first
-failure** — it proves the test runs your code rather than passing by accident.
+You'll get:
+
+```
+ImportError: cannot import name 'tasks' from 'fairy'
+```
+
+**That's the correct first failure** — `tasks.py` doesn't exist yet, and it proves the test
+is really running your code rather than passing by accident.
+
+(You may see `ModuleNotFoundError` instead, depending on import style. `from fairy import
+tasks` gives `ImportError`; `import fairy.tasks` gives `ModuleNotFoundError`. Same meaning:
+the file isn't there.)
 
 ### ⚠ If it breaks
 
