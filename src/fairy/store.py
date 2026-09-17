@@ -33,7 +33,7 @@ def connect(db_path: Path | None = None) -> sqlite3.Connection:
 
 
 @contextmanager
-def session(db_path: Path | None = None) -> Generator[sqlite3.Connection, None, None]:
+def session(db_path: Path | None = None) -> Generator[sqlite3.Connection]:
     """Open a connection, commit on success, and always close it."""
     conn = connect(db_path)
     try:
