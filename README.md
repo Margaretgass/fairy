@@ -1,4 +1,4 @@
-# Fairy
+# NeuroFairy
 
 A local-first ADHD companion: MCP tools, a focus timer, and a desktop fairy.
 
