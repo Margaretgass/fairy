@@ -467,6 +467,9 @@ the file isn't there.)
 | `ModuleNotFoundError: fairy.tasks` before you wrote it | Correct — that's the red step |
 | `TypeError: add_task() takes 3 positional arguments` | You passed `now` positionally. The `*` makes it keyword-only |
 | `sqlite3.ProgrammingError: parameters supplied` | Missing the trailing comma in `(task_id,)` — it must be a tuple |
+| `TypeError: now() takes at most 1 argument` | You wrote `datetime.now(2026, 9, ...)`. `datetime(...)` is the constructor; `.now()` is a method returning the current time. Drop the `.now` |
+| `F821 Undefined name 'get_task'` | You skipped `get_task` — `add_task` and `complete_task` both call it |
+| `sqlite3.OperationalError` on INSERT | Column count doesn't match placeholder count. Ruff can't see inside SQL strings |
 | `assert task.id == 1` fails with `2` | Your fixture isn't giving each test a fresh database |
 | `completed_at` compares unequal | You stored a naive datetime; keep everything timezone-aware with `UTC` |
 

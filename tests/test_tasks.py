@@ -5,7 +5,7 @@ import pytest
 from fairy import store, tasks
 from fairy.models import Category
 
-NOW = datetime.now(2026, 9, 17, 9, 0, 0, tzinfo=UTC)
+NOW = datetime(2026, 9, 17, 9, 0, tzinfo=UTC)
 
 
 @pytest.fixture
