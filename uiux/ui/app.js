@@ -1,3 +1,4 @@
+
 'use strict';
 const $ = s => document.querySelector(s), esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const STORE = 'adhd-fairy-final-v4'; let saved = null, saveError = false, demoFixture = false;
@@ -19,6 +20,23 @@ function go(p) { S.page = p; render(); celebrate() }
 function clock() { return window.bloomClock?.() || '25:00' }
 function modal(html) { $('#dialog').className = ''; $('#dialog').innerHTML = html; $('#dialog').showModal() }
 function quickChat() { return '' }
+async function askNeurofairy(message) {
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: message
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error('Neurofairy could not respond.');
+    }
+
+    return response.json();
+}
 function pixel(id, cls = 'pixel-art') {
     const map = { matcha: 0, coffee: 1, mug: 1, book: 2, chapter: 2, quests: 2, quest: 2, potion: 3, thought: 3, greenbook: 4, settings: 4, rosebook: 5, rug: 5, lantern: 6, lamp: 6, today: 6, crystal: 7, collection: 7, star: 8, spark: 8, moon: 9, return: 9, rain: 9, letter: 10, talk: 10, basket: 11, inbox: 11 };
     const i = map[id] ?? 2; return `<span class="pixel-art ${cls}" aria-hidden="true" style="--col:${i % 4};--row:${Math.floor(i / 4)}"></span>`;
@@ -81,12 +99,42 @@ document.addEventListener('click', e => {
     if (a === 'compact') S.compact = !S.compact; if (a === 'hide') S.hidden = !S.hidden; if (a === 'closequick') { $('#quick').hidden = true; return; } finishAction();
 });
 document.addEventListener('change', e => { if (e.target.dataset.day) { const t = S.daily.find(x => String(x.id) === e.target.dataset.day); t.done = e.target.checked; if (t.done) reward('task', t.id); finishAction(); } if (e.target.dataset.questStep) { const s = currentQuest().steps.find(s => s.id === e.target.dataset.questStep); s.done = e.target.checked; if (s.done) reward('task', s.id); finishAction(); } if (e.target.dataset.setting) { S[e.target.dataset.setting] = e.target.checked; finishAction(); } });
-document.addEventListener('submit', e => {
+document.addEventListener('submit', async e => {
     const f = e.target, kind = f.dataset.form || f.dataset.v2Form; if (!kind) return; e.preventDefault(); const data = new FormData(f); const title = String(data.get('title') || '').trim(); if (['quest', 'step', 'day', 'taskdialog'].includes(kind) && !title) return;
     if (kind === 'quest') { const q = S.quests.find(q => q.id === f.dataset.id), cover = String(data.get('cover')); if (!covers.includes(cover)) return; if (q) { q.title = title; q.cover = cover } else { S.quests.push({ id: crypto.randomUUID(), title, cover, steps: [], completed: false }); } if ($('#dialog').open) $('#dialog').close(); S.page = 'quests'; }
     else if (kind === 'step') { currentQuest().steps.push({ id: crypto.randomUUID(), title, done: false }); currentQuest().completed = false; }
     else if (kind === 'day' || kind === 'taskdialog') { const t = S.daily.find(x => String(x.id) === f.dataset.id); const category = String(data.get('category') || 'Optional'); if (t) { t.title = title; t.category = category } else S.daily.push({ id: crypto.randomUUID(), title, category, done: false }); if ($('#dialog').open) $('#dialog').close(); }
-    else { const input = f.querySelector('textarea,input'), t = input.value.trim(); if (!t) return; if (kind === 'capture') { S.inbox.unshift(t); reward('capture'); toast('Saved to Inbox. Not added to today.'); } else { S.chat.push(['user', t], ['fairy', 'We can start small. Open the task, then choose just the first step.']); S.draft = ''; reward('chat'); } }
+    else {
+        const input = f.querySelector('textarea,input');
+        const t = input.value.trim();
+
+        if (!t) return;
+
+        if (kind === 'capture') {
+            S.inbox.unshift(t);
+            reward('capture');
+            toast('Saved to Inbox. Not added to today.');
+        } else {
+            S.chat.push(['user', t]);
+            S.draft = '';
+            reward('chat');
+            finishAction();
+
+            try {
+                const result = await askNeurofairy(t);
+                S.chat.push(['fairy', result.reply]);
+            } catch (error) {
+                S.chat.push([
+                    'fairy',
+                    'I’m having trouble connecting right now. Your thought is still here, and you can try again in a moment.'
+                ]);
+            }
+
+            finishAction();
+            return;
+        }
+    }
+
     finishAction();
 });
 $('#preview').addEventListener('change', e => go(e.target.value));
