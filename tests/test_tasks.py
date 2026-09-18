@@ -2,8 +2,8 @@ from datetime import UTC, datetime
 
 import pytest
 
-from fairy import store, tasks
-from fairy.models import Category
+from fairy.servers import store, tasks
+from fairy.servers.models import Category
 
 NOW = datetime(2026, 9, 17, 9, 0, tzinfo=UTC)
 

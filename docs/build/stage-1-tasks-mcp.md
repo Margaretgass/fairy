@@ -638,7 +638,7 @@ cd ~/code/fairy && git add -A && git commit -m "feat: implement task operations"
 
 ---
 
-## Session 4 — The MCP server 
+## Session 4 — The MCP server
 
 ### ▶ Start this session
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 import sqlite3
 from datetime import UTC, datetime
 
-from fairy.models import Category, Task
+from fairy.servers.models import Category, Task
 
 
 def _row_to_task(row: sqlite3.Row) -> Task:

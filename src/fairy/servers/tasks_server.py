@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from fastmcp import FastMCP
 
-from fairy import store, tasks
-from fairy.models import Category
+from fairy.servers import store, tasks
+from fairy.servers.models import Category
 
 mcp = FastMCP("fairy-tasks")
 
