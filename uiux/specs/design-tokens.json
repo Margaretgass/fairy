@@ -1,0 +1,64 @@
+{
+  "version": "4.0",
+  "valuesAre": "selected implementation equivalents, not sampled or inferred source values",
+  "colors": {
+    "surface": "#FAF6EE",
+    "softSurface": "#F5EFE5",
+    "ink": "#35214F",
+    "mutedInk": "#665672",
+    "lavender": "#DED0ED",
+    "primary": "#594071",
+    "outline": "#705584",
+    "divider": "#D9D0D7",
+    "gold": "#E9B766",
+    "previewCanvas": "#B8C9B7",
+    "progress": "#9AB58D",
+    "progressTrack": "#E5D9ED"
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    40
+  ],
+  "dimensions": {
+    "sidebar": 190,
+    "titlebar": 46,
+    "sceneRail": 290,
+    "contentGap": 24,
+    "controlHeight": 44,
+    "quickChatWidth": 320,
+    "quickChatHeight": 604,
+    "peekWidth": 240,
+    "fairyHeight": 88,
+    "compactIcon": 32,
+    "windowMax": 1220,
+    "collectionMax": 760,
+    "coverDialogMax": 570
+  },
+  "typography": {
+    "heading": "Pixelify Sans Bold (bundled SIL OFL)",
+    "body": "system sans serif",
+    "bodySize": 16,
+    "secondarySize": 14,
+    "titleSize": 32
+  },
+  "character": {
+    "satchel": false,
+    "computer": false,
+    "home": "mythical library",
+    "quests": "enchanted forest"
+  },
+  "assets": {
+    "icons": "assets/pixel-rewards.png",
+    "fairy": "assets/fairy-full.png",
+    "appIcon": "assets/app-icon.png",
+    "charms": "assets/charms.png",
+    "covers": "assets/book-covers.png",
+    "seatedFairy": "assets/fairy-seated.png",
+    "flowers": "assets/flowers.png"
+  }
+}

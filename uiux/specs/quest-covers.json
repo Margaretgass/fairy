@@ -1,0 +1,38 @@
+[
+  {
+    "id": "lavender",
+    "label": "Lavender",
+    "art": 0,
+    "available": true
+  },
+  {
+    "id": "moss",
+    "label": "Moss",
+    "art": 1,
+    "available": true
+  },
+  {
+    "id": "rose",
+    "label": "Rose",
+    "art": 2,
+    "available": true
+  },
+  {
+    "id": "midnight",
+    "label": "Midnight",
+    "art": 3,
+    "available": true
+  },
+  {
+    "id": "honey",
+    "label": "Honey",
+    "art": 4,
+    "available": true
+  },
+  {
+    "id": "sky",
+    "label": "Sky",
+    "art": 5,
+    "available": true
+  }
+]

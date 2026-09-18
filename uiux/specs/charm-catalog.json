@@ -1,0 +1,146 @@
+[
+  {
+    "id": "star",
+    "name": "First Spark",
+    "object": "Star",
+    "metric": "tasks",
+    "threshold": 1,
+    "art": 0
+  },
+  {
+    "id": "matcha",
+    "name": "A Little Momentum",
+    "object": "Matcha",
+    "metric": "tasks",
+    "threshold": 5,
+    "art": 1
+  },
+  {
+    "id": "potion",
+    "name": "Something Magical",
+    "object": "Potion",
+    "metric": "quests",
+    "threshold": 1,
+    "art": 2
+  },
+  {
+    "id": "lantern",
+    "name": "Welcome Home",
+    "object": "Lantern",
+    "metric": "days",
+    "threshold": 3,
+    "art": 3
+  },
+  {
+    "id": "daisy",
+    "name": "In Bloom",
+    "object": "Daisy",
+    "metric": "flowers",
+    "threshold": 1,
+    "art": 4
+  },
+  {
+    "id": "coffee",
+    "name": "Finding Your Rhythm",
+    "object": "Coffee",
+    "metric": "tasks",
+    "threshold": 25,
+    "art": 5
+  },
+  {
+    "id": "spellbook",
+    "name": "Next Chapter",
+    "object": "Spellbook",
+    "metric": "quests",
+    "threshold": 5,
+    "art": 6
+  },
+  {
+    "id": "key",
+    "name": "A Familiar Place",
+    "object": "Cottage Key",
+    "metric": "days",
+    "threshold": 10,
+    "art": 7
+  },
+  {
+    "id": "basket",
+    "name": "Little Garden",
+    "object": "Flower Basket",
+    "metric": "flowers",
+    "threshold": 5,
+    "art": 8
+  },
+  {
+    "id": "moon_potion",
+    "name": "Moonlit Magic",
+    "object": "Moon Potion",
+    "metric": "tasks",
+    "threshold": 50,
+    "art": 9
+  },
+  {
+    "id": "book_stack",
+    "name": "Keeper of Stories",
+    "object": "Enchanted Book Stack",
+    "metric": "quests",
+    "threshold": 15,
+    "art": 10
+  },
+  {
+    "id": "cottage",
+    "name": "Right at Home",
+    "object": "Glowing Cottage",
+    "metric": "days",
+    "threshold": 30,
+    "art": 11
+  },
+  {
+    "id": "watering_can",
+    "name": "Garden Keeper",
+    "object": "Crystal Watering Can",
+    "metric": "flowers",
+    "threshold": 15,
+    "art": 12
+  },
+  {
+    "id": "crystal_star",
+    "name": "Quietly Powerful",
+    "object": "Crystal Star",
+    "metric": "tasks",
+    "threshold": 100,
+    "art": 13
+  },
+  {
+    "id": "compass",
+    "name": "Forest Explorer",
+    "object": "Enchanted Compass",
+    "metric": "quests",
+    "threshold": 30,
+    "art": 14
+  },
+  {
+    "id": "teacup",
+    "name": "A Season of Magic",
+    "object": "Celestial Teacup",
+    "metric": "days",
+    "threshold": 90,
+    "art": 15
+  },
+  {
+    "id": "terrarium",
+    "name": "Flourishing",
+    "object": "Moonflower Terrarium",
+    "metric": "flowers",
+    "threshold": 30,
+    "art": 16
+  },
+  {
+    "id": "crown",
+    "name": "Every Little Step",
+    "object": "Golden Star Crown",
+    "metric": "tasks",
+    "threshold": 250,
+    "art": 17
+  }
+]

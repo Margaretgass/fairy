@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ADHD Fairy · Design prototype</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bloom.css">
+    <link rel="stylesheet" href="final.css">
+</head>
+
+<body>
+    <div class="demo"><span>DESIGN PROTOTYPE · sample data, simulated AI · local saved demo · scripted
+            chat</span><label>Preview <select id="preview">
+                <option value="today">Today</option>
+                <option value="talk">Talk</option>
+                <option value="inbox">Inbox</option>
+                <option value="quests">Quest shelf</option>
+                <option value="quest">Quest detail</option>
+                <option value="focus">Focus</option>
+                <option value="wrap">Wrap-up</option>
+                <option value="collection">Collection</option>
+                <option value="settings">Settings & privacy</option>
+                <option value="insights">Insights</option>
+                <option value="companion">Desktop companion</option>
+            </select></label></div>
+    <div class="window">
+        <header class="titlebar"><strong>✧ ADHD Fairy</strong><span aria-hidden="true">─ □ ×</span></header>
+        <div class="shell">
+            <nav id="nav" aria-label="Main navigation"></nav>
+            <main id="main"></main>
+        </div>
+    </div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <dialog id="dialog"></dialog>
+    <script src="sprite-rects.js"></script>
+    <script src="charm-engine.js"></script>
+    <script src="bloom-engine.js"></script>
+    <script src="app.js"></script>
+    <script src="bloom-ui.js"></script>
+    <script src="preview.js"></script>
+</body>
+
+</html>
