@@ -55,5 +55,16 @@ def complete_task(task_id: int) -> dict:
         return task.model_dump(mode="json")
 
 
+@mcp.tool
+def delete_task(task_id: int) -> None:
+    """Delete a task from the database.
+
+    Args:
+        task_id: the id of the task to delete
+    """
+    with store.session() as conn:
+        tasks.delete_task(conn, task_id)
+
+
 if __name__ == "__main__":
     main()

@@ -31,7 +31,10 @@ def add_task(
         "INSERT INTO tasks (title, category, done, created_at) VALUES (?, ?, 0, ?)",
         (title.strip(), category.value, now.isoformat()),
     )
-    return get_task(conn, cur.lastrowid)
+    task_id = cur.lastrowid
+    if task_id is None:
+        raise RuntimeError("failed to retrieve the newly inserted task")
+    return get_task(conn, task_id)
 
 
 def get_task(conn: sqlite3.Connection, task_id: int) -> Task:
@@ -60,3 +63,11 @@ def complete_task(conn: sqlite3.Connection, task_id: int, *, now: datetime | Non
         (now.isoformat(), task_id),
     )
     return get_task(conn, task_id)
+
+
+def delete_task(conn: sqlite3.Connection, task_id: int) -> None:
+    """Delete a task from the database.
+    Raises KeyError if it doesn't exist."""
+    get_task(conn, task_id)  # raises if not found
+    conn.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+    return None
