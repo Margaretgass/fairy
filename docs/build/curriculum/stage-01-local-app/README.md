@@ -1,5 +1,7 @@
 # Stage 1 — Existing local app foundation
 
+[← Curriculum index](../README.md) · **Recommended next file:** continue below with Stage 1
+
 > **Status:** Core implementation complete and live-verified. The browser UI is already
 > connected to the local AI. This stage does not rebuild that connection. It documents the
 > working architecture and adds missing automated coverage and quality cleanup.
@@ -9,6 +11,10 @@ CI protects its API contract before work begins on the desktop Fairy.
 
 **Estimated sessions:** 3 small sessions. Stop after each session and report the result
 before continuing.
+
+> **Checkpoints are optional recovery references.** Stay in this `README.md` while you
+> work. Open the matching file in `checkpoints/` only if you are stuck or want to compare
+> the complete expected files and output for that session.
 
 ---
 
@@ -24,7 +30,7 @@ The connection is done. The remaining work here is characterization testing, cle
 accurate documentation—not another integration project. After this short hardening pass,
 the desktop Fairy reuses the existing API instead of creating a second chat system.
 
-The [NeuroFairy architecture map](ARCHITECTURE.md) shows this current path alongside the
+The [NeuroFairy architecture map](../../ARCHITECTURE.md) shows this current path alongside the
 target desktop, task, planning, focus, safe-tool, and read-only integration architecture.
 
 ---
@@ -241,7 +247,7 @@ Do not commit anything from this session because nothing changed.
 
 ### Full-file recovery checkpoint
 
-[Session 1 expected baseline output](checkpoints/stage-1-session-1.md) records the complete
+[Session 1 expected baseline output](checkpoints/session-01.md) records the complete
 test, lint, live-model, and browser result. It explicitly confirms that this observation
 session has no code file to replace.
 
@@ -392,7 +398,7 @@ Stop and report the test output before Session 3.
 ### Full-file recovery checkpoint
 
 If the incremental instructions become unclear, use the
-[Session 2 complete files and expected output](checkpoints/stage-1-session-2.md). It links
+[Session 2 complete files and expected output](checkpoints/session-02.md). It links
 all of `pyproject.toml` and contains `tests/test_web_app.py` from first line to last line.
 
 ---
@@ -529,7 +535,7 @@ Stop and report the automated checks and live smoke-test result before starting 
 
 ### Full-file recovery checkpoint
 
-Use the [Session 3 complete files and expected output](checkpoints/stage-1-session-3.md) if
+Use the [Session 3 complete files and expected output](checkpoints/session-03.md) if
 you get stuck. It provides complete copy-ready versions of every source, configuration,
 browser, and README file changed in this session.
 
@@ -554,7 +560,7 @@ Stage 1 is complete only when:
 
 ## Complete Stage 1 recovery snapshot
 
-The [Stage 1 final recovery snapshot](checkpoints/stage-1-final.md) maps every file created
+The [Stage 1 final recovery snapshot](checkpoints/final/README.md) maps every file created
 or changed by this stage to its complete final contents and records the final expected test,
 lint, browser, and local-model results.
 
@@ -655,5 +661,5 @@ Write short answers in your own notes:
 
 ---
 
-Next: **[Stage 2 — Desktop Fairy companion](stage-2-desktop-fairy.md)**, using PySide6 for
+**Recommended next file:** [Stage 2 — Desktop Fairy companion](../stage-02-desktop-fairy/README.md), using PySide6 for
 the desktop interface and PyObjC only for macOS accessory-window behavior.

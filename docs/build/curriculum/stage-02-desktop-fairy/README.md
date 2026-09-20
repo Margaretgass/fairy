@@ -1,5 +1,7 @@
 # Stage 2 — Desktop Fairy companion
 
+[← Curriculum index](../README.md) · [Previous: Stage 1](../stage-01-local-app/README.md) · **Recommended next file:** continue below with Stage 2
+
 > **Status:** Planned next. Start only after Stage 1 has a clean test, format, and lint
 > baseline.
 
@@ -11,10 +13,14 @@ short honest hover status, and opens a chat popover that reuses the existing loc
 **Estimated sessions:** 4 small sessions. Stop after each session, verify the result, and
 report what happened before continuing.
 
+> **Checkpoints are optional recovery references.** Stay in this `README.md` while you
+> work. Open the matching file in `checkpoints/` only if you are stuck or want to compare
+> the complete expected files and output for that session.
+
 This is the earliest new product feature in the revised curriculum. It makes the working
 local AI reachable from the desktop without creating a second chat service.
 
-See the [architecture map](ARCHITECTURE.md) for the current browser path and target desktop
+See the [architecture map](../../ARCHITECTURE.md) for the current browser path and target desktop
 runtime.
 
 ---
@@ -327,7 +333,7 @@ Stop and report which macOS checks passed. Do not add dragging or chat yet.
 ### Full-file recovery checkpoint
 
 If any incremental edit is unclear, compare against the
-[Session 1 complete files and expected output](checkpoints/stage-2-session-1.md). It contains
+[Session 1 complete files and expected output](checkpoints/session-01.md). It contains
 the entire `pyproject.toml`, `__init__.py`, `window.py`, and `app.py` with no omitted code.
 
 ---
@@ -455,7 +461,7 @@ Stop before adding hover or network behavior.
 
 ### Full-file recovery checkpoint
 
-Use the [Session 2 complete files and expected output](checkpoints/stage-2-session-2.md) if
+Use the [Session 2 complete files and expected output](checkpoints/session-02.md) if
 you get stuck. It contains the entire geometry module, updated window, and geometry test
 file, plus the expected failing and passing pytest results.
 
@@ -608,7 +614,7 @@ feat: connect desktop fairy to authenticated local backend
 
 ### Full-file recovery checkpoint
 
-Use the [Session 3 complete files and expected output](checkpoints/stage-2-session-3.md) if
+Use the [Session 3 complete files and expected output](checkpoints/session-03.md) if
 you get stuck. It links every complete runtime and test file created or changed in this
 session, including the pre-menu application entry point.
 
@@ -670,7 +676,7 @@ Stop and report the automated results and manual lifecycle checks.
 
 ### Full-file recovery checkpoint
 
-Use the [Session 4 complete files and expected output](checkpoints/stage-2-session-4.md) if
+Use the [Session 4 complete files and expected output](checkpoints/session-04.md) if
 you get stuck. It links every final Stage 2 file and the expected terminal and visible
 output.
 
@@ -704,7 +710,7 @@ Stage 2 is complete only when:
 
 ## Complete Stage 2 recovery snapshot
 
-The [Stage 2 final recovery snapshot](checkpoints/stage-2-final.md) maps every final source,
+The [Stage 2 final recovery snapshot](checkpoints/final/README.md) maps every final source,
 test, and configuration path to a complete copy-ready file and lists the final expected
 terminal and product output. Use it to recover from a missed edit; do not skip the smaller
 session explanations unless you are debugging.
@@ -765,5 +771,5 @@ Write short answers in your own notes:
 
 ---
 
-Next after Stage 2: **Stage 3 — Internal tasks and next actions**, where the browser,
+**Recommended next file:** [Stage 3 — Internal tasks and next actions](../stage-03-tasks/README.md), where the browser,
 desktop Fairy, FastAPI routes, and optional MCP clients begin using one shared task service.

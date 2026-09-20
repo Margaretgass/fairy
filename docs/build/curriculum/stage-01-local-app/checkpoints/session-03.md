@@ -1,5 +1,9 @@
 # Stage 1 · Session 3 recovery checkpoint
 
+[← Back to Stage 1 instructions](../README.md)
+
+> **Use only if stuck.** This is a recovery reference, not another lesson to complete.
+
 Session 3 changes several existing files, including two larger browser files. To keep each
 fallback directly copyable, the complete expected files are stored as source snapshots
 rather than abbreviated snippets.
@@ -8,12 +12,12 @@ Every link below opens the entire file from its first line to its last line:
 
 | Repository destination | Complete expected file |
 |---|---|
-| `src/fairy/prompts.py` | [Complete prompts.py](stage-1-final/src/fairy/prompts.py) |
-| `src/fairy/web_app.py` | [Complete web_app.py](stage-1-final/src/fairy/web_app.py) |
-| `.env.example` | [Complete .env.example](stage-1-final/.env.example) |
-| `uiux/ui/index.html` | [Complete index.html](stage-1-final/uiux/ui/index.html) |
-| `uiux/ui/app.js` | [Complete app.js](stage-1-final/uiux/ui/app.js) |
-| `README.md` | [Complete root README](stage-1-final/ROOT_README.md) |
+| `src/fairy/prompts.py` | [Complete prompts.py](final/complete-code/src/fairy/prompts.py) |
+| `src/fairy/web_app.py` | [Complete web_app.py](final/complete-code/src/fairy/web_app.py) |
+| `.env.example` | [Complete .env.example](final/complete-code/.env.example) |
+| `uiux/ui/index.html` | [Complete index.html](final/complete-code/uiux/ui/index.html) |
+| `uiux/ui/app.js` | [Complete app.js](final/complete-code/uiux/ui/app.js) |
+| `README.md` | [Complete root README](final/complete-code/ROOT_README.md) |
 
 When using a recovery file, copy its full contents to the repository destination shown in
 the left column. `ROOT_README.md` is deliberately named differently inside the checkpoint
@@ -21,7 +25,7 @@ so it cannot be confused with the curriculum README.
 
 ### Preview without copying files
 
-Open [the self-contained Stage 1 prototype](stage-1-final/uiux/ui/index.html) for a visual
+Open [the self-contained Stage 1 prototype](final/complete-code/uiux/ui/index.html) for a visual
 check. Its neighboring styles, scripts, fonts, and images are unchanged support copies that
 allow the checkpoint to render when opened directly. Only the files in the table above are
 Stage 1 recovery destinations.

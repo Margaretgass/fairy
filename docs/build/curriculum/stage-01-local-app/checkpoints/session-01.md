@@ -1,5 +1,9 @@
 # Stage 1 · Session 1 recovery checkpoint
 
+[← Back to Stage 1 instructions](../README.md)
+
+> **Use only if stuck.** This is a recovery reference, not another lesson to complete.
+
 Session 1 is an observation step. It intentionally changes no files, so there is no code
 file to replace. The recovery checkpoint is the verified baseline output below.
 
