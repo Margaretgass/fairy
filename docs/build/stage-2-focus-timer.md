@@ -1,10 +1,5 @@
 # Stage 2 — Focus timer
 
-> **Historical reference — do not follow as Stage 2.** The useful pure-state-machine and
-> body-doubling material will be reconciled into revised Stage 5. Desktop Fairy is the real
-> Stage 2 priority, and Claude Desktop is not the application runtime. Return to the
-> [current curriculum index](README.md) before making changes.
-
 > **By the end of this stage** you will have a focus timer with thirteen tests that run in
 > hundredths of a second, and you'll be able to say *"start a 25 minute focus session"* to
 > Claude Desktop.
@@ -813,6 +808,4 @@ ever suggest more than the remaining room in the block?
 It's a pure function, so it belongs in `domain/` — and your test for it will run in
 microseconds.
 
-> **Historical sequence note:** this focus lesson is awaiting revision as Stage 5. Return
-> to the [current curriculum](README.md); the current next product milestone is
-> [Stage 2 — Desktop Fairy companion](stage-2-desktop-fairy.md).
+Next: [Stage 3 — The desktop fairy](stage-3-desktop-fairy.md)

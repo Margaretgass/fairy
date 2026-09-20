@@ -1,10 +1,5 @@
 # Stage 1 — Tasks MCP server
 
-> **Historical reference — do not follow as Stage 1.** The implemented task, SQLite, and
-> FastMCP material will be reconciled into revised Stage 3. Claude Desktop setup, this stage
-> number, and any instruction that rebuilds existing files are obsolete. Return to the
-> [current curriculum index](README.md) before making changes.
-
 > **By the end of this stage** you will say *"add a task to email my professor"* to Claude
 > Desktop, and it will land in a database you built.
 

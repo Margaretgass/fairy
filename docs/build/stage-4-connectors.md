@@ -1,10 +1,5 @@
 # Stage 4 — Real integrations
 
-> **Historical reference — do not follow as Stage 4.** Connector concepts will be narrowed
-> into revised Stage 7 after the local product loop works. All third-party integrations
-> begin read-only with explicit consent, provenance, revocation, and no silent writes.
-> Return to the [current curriculum index](README.md) before making changes.
-
 > **By the end of this stage** you can ask *"what's due this week and what's in my inbox?"*
 > and get an answer from your actual school and work life.
 

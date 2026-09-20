@@ -1,10 +1,5 @@
 # Stage 7 — Charms and garden
 
-> **Historical reference — do not follow as Stage 7.** The non-punitive reward rules remain
-> useful, but implementation is deferred to revised Stage 8 after the core product,
-> evaluation, accessibility, and privacy work. Return to the
-> [current curriculum index](README.md) before making changes.
-
 > **By the end of this stage** finishing tasks earns charms, flowers collect in a garden,
 > and the project is complete.
 
@@ -429,7 +424,7 @@ What most people actually read. In this order:
 Write them as you go, not at the end. Good ones from this build:
 
 - MCP-first instead of a web backend
-- PySide6 for the desktop surface — with the accessory-policy experiment
+- PySide6 over Swift — with the accessory-policy experiment
 - stdlib `sqlite3` over an ORM
 - Local-first over hosted
 - Which model, backed by your own eval numbers
