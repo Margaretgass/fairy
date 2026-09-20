@@ -1,5 +1,10 @@
 # Stage 5 — Your own agent
 
+> **Historical reference — do not follow as Stage 5.** Safe local tools will become revised
+> Stage 6. The working AI path already uses LangChain `ChatOllama` with local
+> `qwen2.5:3b`; the provider setup, model tag, MCP-first loop, and stage number below are
+> obsolete. Return to the [current curriculum index](README.md) before making changes.
+
 > **By the end of this stage** you'll run `uv run fairy chat` and talk to a fully local AI
 > that uses your tools — no API key, no internet, nothing leaving your machine.
 
@@ -579,4 +584,6 @@ Then run the same three eval cases through all three and look at the table. Wher
 use? **Write the answer in `docs/decisions/`** — a reasoned model-selection note backed by
 your own numbers is exactly the kind of artefact that gets discussed in interviews.
 
-Next: [Stage 6 — Web UI](stage-6-web-ui.md)
+> **Historical sequence note:** the old Web UI stage has been retired because the browser
+> UI and local chat connection already exist. Return to the [current curriculum](README.md)
+> for the revised order.

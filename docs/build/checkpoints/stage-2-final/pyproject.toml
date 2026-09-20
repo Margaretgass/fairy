@@ -1,0 +1,49 @@
+[project]
+name = "fairy"
+version = "0.1.0"
+description = "A local-first ADHD companion: MCP tools, a focus timer, and a desktop fairy."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.141.1",
+    "fastmcp>=4.0.5",
+    "langchain>=1.4.2",
+    "langchain-ollama>=1.1.0",
+    "pydantic>=2.13.5",
+    "PySide6",
+    "pyobjc-framework-Cocoa; sys_platform == 'darwin'",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[project.scripts]
+fairy-tasks = "fairy.servers.tasks_server:main"
+fairy-desktop = "fairy.desktop.app:main"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=8.0",
+    "ruff>=0.16",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fairy"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+# Tutorial code blocks are illustrative: aligned comments aid reading, and some
+# snippets are deliberately incomplete. Don't reformat them.
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+# E/W pycodestyle, F pyflakes, I import sorting, UP modern syntax, B common bugs
+select = ["E", "W", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
