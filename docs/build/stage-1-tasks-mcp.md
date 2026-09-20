@@ -1,7 +1,7 @@
 # Stage 1 — Tasks MCP server
 
-> **By the end of this stage** you will say *"add a task to email my professor"* to Claude
-> Desktop, and it will land in a database you built.
+> **By the end of this stage** you will say *"add a task to email my professor"* to Claude and land in the database (I changed this and hooked up my fairy and UI to Ollama qwen2.5:3b)
+>.
 
 **Sessions:** 6 · **Time:** ~2 weeks at 10 h/week
 
@@ -28,7 +28,7 @@
 cd ~/code/fairy && git pull && uv sync
 ```
 
-Your repo already has `pyproject.toml`, `.gitignore`, `.env.example`, CI, VS Code
+Your repo should already have `pyproject.toml`, `.gitignore`, `.env.example`, CI, VS Code
 settings, and the `src/fairy/` skeleton.
 
 ```bash
@@ -47,7 +47,7 @@ pytest saying "no tests ran" is correct — you haven't written any yet.
 cd ~/code/fairy && git pull && uv sync
 ```
 
-**Goal:** define what a task *is*, and where it lives.
+**Goal:** define what a task is, and where it lives.
 
 **Two files:** `models.py` (shapes) and `store.py` (storage). Keeping those separate is the
 first architectural decision you make, and everything later depends on it.
@@ -58,7 +58,7 @@ first architectural decision you make, and everything later depends on it.
 
 **Why it matters:**
 - Every other part of Fairy agrees on these shapes — MCP server, web UI, desktop fairy
-- Pydantic rejects bad data here, before it reaches your database
+- Pydantic rejects bad data before it reaches your database
 
 Start with the imports:
 
@@ -274,7 +274,7 @@ path segments. Reads like a path, works on any OS, much better than gluing strin
 | `PRAGMA journal_mode=WAL` | Write-Ahead Logging. Lets one process read while another writes. **Stage 3's desktop fairy depends on this** — without it you get `database is locked`. |
 | `executescript(SCHEMA)` | Runs several SQL statements at once. `execute()` only runs one. |
 
-**New concept: `@contextmanager`**
+**New concept: `@contextmanager ` a decorator**
 
 ```python
 @contextmanager
