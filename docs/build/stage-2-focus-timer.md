@@ -815,4 +815,4 @@ microseconds.
 
 > **Historical sequence note:** this focus lesson is awaiting revision as Stage 5. Return
 > to the [current curriculum](README.md); the current next product milestone is
-> [Stage 2 — Desktop Fairy companion](../stage-02-desktop-fairy/README.md).
+> [Stage 2 — Desktop Fairy companion](stage-2-desktop-fairy.md).

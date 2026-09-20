@@ -1,9 +1,5 @@
 # Stage 2 final recovery snapshot
 
-[← Back to Stage 2 instructions](../../README.md)
-
-> **Use only if stuck.** This is the whole-stage recovery reference, not required reading.
-
 This is the complete Stage 2 checkpoint. Every hand-maintained file is stored below in
 copy-ready form from its first line to its last line. No code is replaced with ellipses.
 
@@ -41,24 +37,24 @@ tests/
 
 | Final path | Full-file checkpoint |
 |---|---|
-| `pyproject.toml` | [Complete pyproject](complete-code/pyproject.toml) |
-| `src/fairy/web_app.py` | [Complete web application](complete-code/src/fairy/web_app.py) |
-| `src/fairy/desktop/__init__.py` | [Complete package marker](complete-code/src/fairy/desktop/__init__.py) |
-| `src/fairy/desktop/api_client.py` | [Complete authenticated API client](complete-code/src/fairy/desktop/api_client.py) |
-| `src/fairy/desktop/app.py` | [Complete final application entry point](complete-code/src/fairy/desktop/app.py) |
-| `src/fairy/desktop/backend.py` | [Complete backend controller](complete-code/src/fairy/desktop/backend.py) |
-| `src/fairy/desktop/backend_protocol.py` | [Complete handshake protocol](complete-code/src/fairy/desktop/backend_protocol.py) |
-| `src/fairy/desktop/backend_server.py` | [Complete owned backend entry point](complete-code/src/fairy/desktop/backend_server.py) |
-| `src/fairy/desktop/chat_popover.py` | [Complete chat popover](complete-code/src/fairy/desktop/chat_popover.py) |
-| `src/fairy/desktop/geometry.py` | [Complete geometry module](complete-code/src/fairy/desktop/geometry.py) |
-| `src/fairy/desktop/status_popover.py` | [Complete status popover](complete-code/src/fairy/desktop/status_popover.py) |
-| `src/fairy/desktop/window.py` | [Complete floating window](complete-code/src/fairy/desktop/window.py) |
-| `tests/test_backend_server.py` | [Complete backend-server tests](complete-code/tests/test_backend_server.py) |
-| `tests/test_desktop_backend_integration.py` | [Complete controller/client security regression tests](complete-code/tests/test_desktop_backend_integration.py) |
-| `tests/test_desktop_backend_protocol.py` | [Complete handshake and lifecycle tests](complete-code/tests/test_desktop_backend_protocol.py) |
-| `tests/test_desktop_geometry.py` | [Complete geometry tests](complete-code/tests/test_desktop_geometry.py) |
-| `tests/test_desktop_protocol.py` | [Complete response-decoder tests](complete-code/tests/test_desktop_protocol.py) |
-| `tests/test_web_app.py` | [Complete web-route and authentication tests](complete-code/tests/test_web_app.py) |
+| `pyproject.toml` | [Complete pyproject](stage-2-final/pyproject.toml) |
+| `src/fairy/web_app.py` | [Complete web application](stage-2-final/src/fairy/web_app.py) |
+| `src/fairy/desktop/__init__.py` | [Complete package marker](stage-2-final/src/fairy/desktop/__init__.py) |
+| `src/fairy/desktop/api_client.py` | [Complete authenticated API client](stage-2-final/src/fairy/desktop/api_client.py) |
+| `src/fairy/desktop/app.py` | [Complete final application entry point](stage-2-final/src/fairy/desktop/app.py) |
+| `src/fairy/desktop/backend.py` | [Complete backend controller](stage-2-final/src/fairy/desktop/backend.py) |
+| `src/fairy/desktop/backend_protocol.py` | [Complete handshake protocol](stage-2-final/src/fairy/desktop/backend_protocol.py) |
+| `src/fairy/desktop/backend_server.py` | [Complete owned backend entry point](stage-2-final/src/fairy/desktop/backend_server.py) |
+| `src/fairy/desktop/chat_popover.py` | [Complete chat popover](stage-2-final/src/fairy/desktop/chat_popover.py) |
+| `src/fairy/desktop/geometry.py` | [Complete geometry module](stage-2-final/src/fairy/desktop/geometry.py) |
+| `src/fairy/desktop/status_popover.py` | [Complete status popover](stage-2-final/src/fairy/desktop/status_popover.py) |
+| `src/fairy/desktop/window.py` | [Complete floating window](stage-2-final/src/fairy/desktop/window.py) |
+| `tests/test_backend_server.py` | [Complete backend-server tests](stage-2-final/tests/test_backend_server.py) |
+| `tests/test_desktop_backend_integration.py` | [Complete controller/client security regression tests](stage-2-final/tests/test_desktop_backend_integration.py) |
+| `tests/test_desktop_backend_protocol.py` | [Complete handshake and lifecycle tests](stage-2-final/tests/test_desktop_backend_protocol.py) |
+| `tests/test_desktop_geometry.py` | [Complete geometry tests](stage-2-final/tests/test_desktop_geometry.py) |
+| `tests/test_desktop_protocol.py` | [Complete response-decoder tests](stage-2-final/tests/test_desktop_protocol.py) |
+| `tests/test_web_app.py` | [Complete web-route and authentication tests](stage-2-final/tests/test_web_app.py) |
 
 If an anchor does not jump in your Markdown viewer, open the linked checkpoint and search
 for the exact path shown in the left column.

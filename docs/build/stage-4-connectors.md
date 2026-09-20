@@ -731,4 +731,4 @@ Then add a deliberately broken one, watch the test catch it, and delete it. That
 *contract test*, and it's how you stop connector number seven from quietly drifting away
 from the shape everything else expects.
 
-Historical next step: [legacy agent guide](stage-06-agent-legacy.md)
+Next: [Stage 5 — Your own agent](stage-5-agent.md)

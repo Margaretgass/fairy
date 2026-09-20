@@ -77,8 +77,8 @@ No third-party account is connected, and V1 integrations will not modify externa
 
 ## Follow-along curriculum
 
-Start with `docs/build/curriculum/README.md`. While viewing this recovery snapshot, use the
-[current curriculum link](../../../../README.md). The curriculum distinguishes implemented,
+Start with `docs/build/README.md`. While viewing this recovery snapshot, use the
+[current curriculum link](../../README.md). The curriculum distinguishes implemented,
 prototype, planned, and future-optional behavior.
 
 ## License

@@ -1,9 +1,5 @@
 # Stage 2 · Session 2 recovery checkpoint
 
-[← Back to Stage 2 instructions](../README.md)
-
-> **Use only if stuck.** This is a recovery reference, not another lesson to complete.
-
 These are the complete files created or changed by Session 2. Files not listed remain as
 shown in the Session 1 checkpoint.
 

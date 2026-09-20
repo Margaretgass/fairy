@@ -885,7 +885,7 @@ Your README, in this order:
 
 1. **One sentence** on what this is
 2. **A screenshot** of Claude Desktop calling your tool — your proof
-3. The **architecture diagram** from `docs/build/ARCHITECTURE.md`
+3. The **architecture diagram** from `docs/build/README.md`
 4. **Setup** — `uv sync`, then the config block
 5. A **CI badge**: `![CI](https://github.com/<you>/fairy/actions/workflows/ci.yml/badge.svg)`
 
@@ -955,4 +955,4 @@ Think about this while you do it: should deleting a task that doesn't exist rais
 quietly do nothing? There's a defensible answer either way. Pick one, write the test that
 pins it down, and say why in the docstring. That decision *is* API design.
 
-Historical next step: [legacy focus timer guide](stage-05-focus-timer-legacy.md)
+Next: [Stage 2 — Focus timer](stage-2-focus-timer.md)
