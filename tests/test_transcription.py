@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import subprocess
 from pathlib import Path
+from typing import get_type_hints
 
 import pytest
 
@@ -11,6 +12,24 @@ from fairy.transcription import (
     WhisperCppConfig,
     transcribe_audio,
 )
+
+
+def test_transcribe_audio_type_hints_resolve() -> None:
+    annotations = get_type_hints(transcribe_audio)
+
+    assert annotations["return"] is str
+
+
+def test_config_uses_documented_default_model_path(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(Path, "home", lambda: tmp_path)
+    monkeypatch.delenv("FAIRY_WHISPER_MODEL", raising=False)
+
+    config = WhisperCppConfig.from_env()
+
+    assert config.model_path == tmp_path / ".fairy/models/ggml-base.en.bin"
 
 
 def make_fake_config(tmp_path: Path) -> WhisperCppConfig:

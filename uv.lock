@@ -452,6 +452,7 @@ dependencies = [
     { name = "fastmcp" },
     { name = "langchain" },
     { name = "langchain-ollama" },
+    { name = "python-multipart" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -467,6 +468,7 @@ requires-dist = [
     { name = "fastmcp", specifier = ">=4.0.5" },
     { name = "langchain", specifier = ">=1.4.2" },
     { name = "langchain-ollama", specifier = ">=1.1.0" },
+    { name = "python-multipart", specifier = ">=0.0.32" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.53.0" },
 ]
 

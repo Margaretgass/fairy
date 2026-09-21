@@ -3,9 +3,21 @@ from __future__ import annotations
 import os
 import subprocess
 import tempfile
-from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal, Protocol
+
+
+class ProcessRunner(Protocol):
+    def __call__(
+        self,
+        command: list[str],
+        /,
+        *,
+        check: bool,
+        capture_output: bool,
+        text: Literal[True],
+    ) -> subprocess.CompletedProcess[str]: ...
 
 
 class TranscriptionUnavailable(RuntimeError):
@@ -26,17 +38,15 @@ class WhisperCppConfig:
     language: str = "en"
 
     @classmethod
-    def from_env(cls) -> "WhisperCppConfig":
+    def from_env(cls) -> WhisperCppConfig:
         """build config from env defaults and optional overrides"""
         cli_default = Path.home() / ".fairy/whisper.cpp/build/bin/whisper-cli"
-        model_default = Path.home() / ".fairy/whisper.cpp/models/ggml-base.en.bin"
+        model_default = Path.home() / ".fairy/models/ggml-base.en.bin"
         return cls(
             cli_path=Path(os.environ.get("FAIRY_WHISPER_CLI", cli_default)),
             model_path=Path(os.environ.get("FAIRY_WHISPER_MODEL", model_default)),
             ffmpeg_path=os.environ.get("FAIRY_FFMPEG", "ffmpeg"),
         )
-
-    ProcessRunner = Callable[[list[str]], subprocess.CompletedProcess[str]]
 
 
 def clean_transcript(text: str) -> str:
