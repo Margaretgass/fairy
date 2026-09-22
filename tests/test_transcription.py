@@ -93,6 +93,17 @@ def test_converter_receives_expected_ffmpeg_args(tmp_path: Path) -> None:
     assert ffmpeg_command[ffmpeg_command.index("-c:a") + 1] == "pcm_s16le"
 
 
+def test_whisper_uses_a_bounded_thread_count(tmp_path: Path) -> None:
+    source_path = tmp_path / "audio.wav"
+    source_path.write_bytes(b"fake audio")
+
+    runner, calls = make_fake_runner()
+    transcribe_audio(source_path, make_fake_config(tmp_path), runner=runner)
+
+    whisper_command = calls[1]
+    assert whisper_command[whisper_command.index("-t") + 1] == "4"
+
+
 def test_whisper_command_uses_separate_arguments_no_shell(tmp_path: Path) -> None:
     source_path = tmp_path / "audio.wav"
     source_path.write_bytes(b"fake audio")

@@ -8,6 +8,7 @@
 | assets/fairy-full.png | Speaking, Inbox and floating Fairy | Whole RGBA character; contain fitting |
 | assets/flowers.png | Five growth stages and five species | Cream-backed5×2 atlas, plain terracotta pots, no hearts |
 | assets/pixel-rewards.png | Existing navigation/inbox icons | RGBA4×3 atlas |
+| assets/microphone.png | Voice brain-dump control | Standalone RGBA pixel icon; transparent background; optimized for 28–32 px display |
 | assets/app-icon.png | App icon source | Prepare final opaque AppIcon catalog/export |
 | assets/pixelify-sans-700.woff2 | Browser display headings | Bundled font |
 | assets/PixelifySans-Bold.ttf | Native display headings | Register in target; PostScript PixelifySans-Bold |

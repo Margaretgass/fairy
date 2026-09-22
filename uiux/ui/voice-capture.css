@@ -1,0 +1,50 @@
+.composer-input {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+form.composer {
+    gap: 3px;
+}
+
+.voice-button {
+    position: absolute;
+    right: 4px;
+    bottom: 3px;
+    display: grid;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: #3f356f;
+    padding: 0;
+    cursor: pointer;
+}
+
+.voice-button img {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.voice-button:hover,
+.voice-button:focus-visible {
+    background: transparent;
+}
+
+.voice-button:disabled {
+    opacity: 0.6;
+}
+
+.voice-status {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 0;
+    color: var(--muted-ink, #665672);
+    font-size: 0.75rem;
+}

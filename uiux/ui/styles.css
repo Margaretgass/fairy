@@ -320,7 +320,7 @@ select {
 
 form.composer {
     display: flex;
-    gap: 8px;
+    gap: 4px;
     margin-top: 24px
 }
 

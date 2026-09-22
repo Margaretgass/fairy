@@ -36,6 +36,7 @@ class WhisperCppConfig:
     model_path: Path
     ffmpeg_path: str = "ffmpeg"
     language: str = "en"
+    threads: int = 4
 
     @classmethod
     def from_env(cls) -> WhisperCppConfig:
@@ -46,6 +47,7 @@ class WhisperCppConfig:
             cli_path=Path(os.environ.get("FAIRY_WHISPER_CLI", cli_default)),
             model_path=Path(os.environ.get("FAIRY_WHISPER_MODEL", model_default)),
             ffmpeg_path=os.environ.get("FAIRY_FFMPEG", "ffmpeg"),
+            threads=int(os.environ.get("FAIRY_WHISPER_THREADS", "4")),
         )
 
 
@@ -109,6 +111,8 @@ def transcribe_audio(
                     str(wav_path),
                     "-l",
                     config.language,
+                    "-t",
+                    str(config.threads),
                     "-nt",
                     "-np",
                     "-otxt",
